@@ -1,0 +1,179 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>doraemon</artifactId>
+        <groupId>cn.moretv.doraemon</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>doraemon-test</artifactId>
+
+
+    <properties>
+        <!--通用配置已经在父pom.xml中指定，此位置只需要指定此项目特定的属性-->
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>cn.moretv.doraemon</groupId>
+            <artifactId>doraemon-algorithm</artifactId>
+            <version>${doraemon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.moretv.doraemon</groupId>
+            <artifactId>doraemon-reorder</artifactId>
+            <version>${doraemon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.moretv.doraemon</groupId>
+            <artifactId>doraemon-data-reader</artifactId>
+            <version>${doraemon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.whaley.bigdata</groupId>
+            <artifactId>sdk_2.11</artifactId>
+            <version>1.0.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kafka_2.11</artifactId>
+                    <groupId>org.apache.kafka</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cassandra-driver-core</artifactId>
+                    <groupId>com.datastax.cassandra</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jedis</artifactId>
+                    <groupId>redis.clients</groupId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+        <dependency>
+            <groupId>cn.moretv.doraemon</groupId>
+            <artifactId>doraemon-data-writer</artifactId>
+            <version>${doraemon.version}</version>
+        </dependency>
+
+
+        <!-- 用来排除服务器已经提供的jar包 start ,for assembly assembly-zip.xml-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-graphx_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <!-- 用来排除服务器已经提供的jar包 end -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${artifactId}-${version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                    <args>
+                        <arg>-target:jvm-1.5</arg>
+                    </args>
+                </configuration>
+            </plugin>
+
+         <!--   <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependency</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>runtime</includeScope>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>make-dir</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/assembly-zip.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+
+                <!--    <execution>
+                        <id>make-frontpage-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/frontpage.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>-->
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

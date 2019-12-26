@@ -1,0 +1,58 @@
+<assembly>
+    <id>frontpage</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <excludes>
+                <exclude>*:*:jar</exclude>
+            </excludes>
+            <includes>
+                <include>cn.moretv.doraemon:*:jar</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <!-- README.txt conf/-->
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>conf/</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.build.directory}/</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>./lib</outputDirectory>
+        </fileSet>
+
+        <!-- bin/*.sh -->
+        <fileSet>
+            <directory>src/main/resources/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <fileMode>755</fileMode>
+        </fileSet>
+
+        <!-- workflow-->
+        <fileSet>
+            <directory>src/main/resources/workflow/</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>frontpage/</include>
+            </includes>
+        </fileSet>
+
+    </fileSets>
+</assembly>

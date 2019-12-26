@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>hive.execution.engine</name>
+        <value>tez</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://bigdata-cmpt-128-25:3306/hive?createDatabaseIfNotExsit=true;characterEncoding=UTF-8</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>
+        <value>hive</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>
+        <value>hive@whaley</value>
+    </property>
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>/user/hive/warehouse</value>
+    </property>
+
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://bigdata-cmpt-128-1:9083,thrift://bigdata-cmpt-128-13:9083,thrift://bigdata-cmpt-128-25:9083</value>
+        <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.
+        </description>
+    </property>
+
+
+    <property>
+        <name>hive.cli.print.header</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.tez.exec.print.summary</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>hive.exec.mode.local.auto</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.tez.container.size</name>
+        <value>2048</value>
+        <defaultValue>1024</defaultValue>
+        <description>Int value. The amount of memory in MB to be used by the AppMaster</description>
+        <type>integer</type>
+    </property>
+
+    <property>
+        <name>mapreduce.job.reduces</name>
+        <value>-1</value>
+    </property>
+
+    <property>
+        <name>hive.llap.execution.mode</name>
+        <value>auto</value>
+        <defaultValue>none</defaultValue>
+        <description>Possible Values: auto, none, all, map</description>
+    </property>
+
+    <property>
+        <name>hive.llap.daemon.web.port</name>
+        <value>15002</value>
+        <defaultValue>15002</defaultValue>
+    </property>
+
+    <property>
+        <name>hive.llap.daemon.service.hosts</name>
+        <value>@llap_hive</value>
+        <description>
+            start llap: ./bin/hive --service llap --name llap_hive --instances 40 --size 4g
+                        ./llap-slider-****/run.sh
+            stop llap: slider stop llaptest
+        </description>
+    </property>
+
+
+
+    <property>
+        <name>hive.zookeeper.quorum</name>
+        <value>bigdata-cmpt-128-1:2181,bigdata-cmpt-128-13:2181,bigdata-cmpt-128-25:2181</value>
+    </property>
+
+    <property>
+        <name>hive.zookeeper.client.port</name>
+        <value>2181</value>
+    </property>
+
+    <property>
+        <name>hive.zookeeper.namespace</name>
+        <value>hive_zookeeper_namespace</value>
+    </property>
+
+    <!-- hiveserver2 -->
+
+    <property>
+        <name>hive.server2.support.dynamic.service.discovery</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.server2.zookeeper.namespace</name>
+        <value>hive_zookeeper_namespace</value>
+    </property>
+
+    <property>
+        <name>hive.server2.thrift.bind.host</name>
+        <value>0.0.0.0</value>
+    </property>
+
+    <property>
+        <name>hive.server2.thrift.port</name>
+        <value>10000</value>
+    </property>
+
+    <property>
+        <name>hive.server2.enable.doAs</name>
+        <value>false</value>
+    </property>
+
+    <!-- pheonix -->
+    <property>
+        <name>phoenix.zookeeper.quorum</name>
+        <value>bigdata-cmpt-128-1,bigdata-cmpt-128-13,bigdata-cmpt-128-25</value>
+    </property>
+
+    <property>
+        <name>phoenix.zookeeper.client.port</name>
+        <value>2181</value>
+    </property>
+
+
+    <property>
+        <name>hive.aux.jars.path</name>
+        <value>file:///opt/hive/lib/phoenix-HBase-server.jar,file:///opt/hive/lib/phoenix-hive-HBase.jar,file:///opt/hive/lib/phoenix-hive-HBase-sources.jar,file:///opt/hive/lib/hive-hcatalog-core.jar,file:///opt/hive/lib/hive-hcatalog-streaming.jar,file:///opt/hive/lib/hive-hcatalog-server-extensions.jar,file:///opt/hive/lib/hive-hcatalog-pig-adapter.jar</value>
+    </property>
+
+
+    <!-- acid -->
+    <property>
+        <name>hive.txn.manager</name>
+        <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
+    </property>
+
+    <property>
+        <name>hive.compactor.initiator.on</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.compactor.worker.threads</name>
+        <value>10</value>
+    </property>
+
+    <property>
+        <name>hive.support.concurrency</name>
+        <value>true</value>
+    </property>
+
+    <!-- hbase -->
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>bigdata-cmpt-128-1,bigdata-cmpt-128-13,bigdata-cmpt-128-25</value>
+        <description></description>
+    </property>
+
+    <!-- 允许类型不兼容列类型转换,目前系统多为外部表,列定义经常需要做修改 -->
+    <property>
+        <name>hive.metastore.disallow.incompatible.col.type.changes</name>
+        <value>false</value>
+    </property>
+
+
+    <!-- tcp协议下的线程池的线程数 -->
+    <property>
+        <name>hive.server2.thrift.min.worker.threads</name>
+        <value>50</value>
+        <description>Minimum number of worker threads when in TCP mode.</description>
+    </property>
+
+    <property>
+        <name>hive.server2.thrift.max.worker.threads</name>
+        <value>500</value>
+        <description>Maximum number of worker threads when in TCP mode.</description>
+    </property>
+
+    <!-- 配置异步线程池的线程数 -->
+
+    <property>
+        <name>hive.server2.async.exec.threads</name>
+        <value>100</value>
+        <description>Number of threads in the async thread pool for HiveServer2</description>
+    </property>
+
+    <!-- 配置异步线程结束的超时时间(超过这个时间HS会退出)： -->
+    <property>
+        <name>hive.server2.async.exec.shutdown.timeout</name>
+        <value>10</value>
+        <description>Time (in seconds) for which HiveServer2 shutdown will wait for async
+            threads to terminate</description>
+    </property>
+
+
+
+    <!-- 配置异步线程的等待超时时间（超过这个值线程会被回收）-->
+    <property>
+        <name>hive.server2.async.exec.keepalive.time</name>
+        <value>10</value>
+        <description>Time (in seconds) that an idle HiveServer2 async thread (from the thread pool) will wait
+            for a new task to arrive before terminating</description>
+    </property>
+
+    <property>
+        <name>hive.server2.long.polling.timeout</name>
+        <value>5000L</value>
+        <description>Time in milliseconds that HiveServer2 will wait, before responding to asynchronous calls that use long polling</description>
+    </property>
+
+
+
+    <!-- 配置请求缓冲队列的长度 -->
+    <property>
+        <name>hive.server2.async.exec.wait.queue.size</name>
+        <value>100</value>
+        <description>Size of the wait queue for async thread pool in HiveServer2.
+            After hitting this limit, the async thread pool will reject new requests.</description>
+    </property>
+   <!-- 开启自定义函数 不全default 库 -->
+    <property>
+        <name>hive.function.default.function.enabled</name>
+        <value>true</value>
+    </property>
+
+</configuration>
+

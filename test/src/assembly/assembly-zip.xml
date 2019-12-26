@@ -1,0 +1,88 @@
+<assembly>
+    <id>release-zip</id>
+    <!-- 为了在服务器上测试运行，打包成zip -->
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <dependencySets>
+    <!--    <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <excludes>
+                <exclude>*:*:jar</exclude>
+            </excludes>
+            <includes>
+                <include>cn.moretv.doraemon:*:jar</include>
+            </includes>
+        </dependencySet>-->
+
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <!-- 将scope为runtime的依赖包打包到lib目录下，默认也是runtime -->
+            <scope>runtime</scope>
+         <!--   <excludes>
+                <exclude>org.apache.spark:*:</exclude>
+            </excludes>-->
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+
+
+        <fileSet>
+            <directory>src/main/resources/conf</directory>
+            <includes>
+                <include>*.properties</include>
+            </includes>
+            <outputDirectory>config</outputDirectory>
+            <fileMode>644</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/main/resources/bin</directory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>744</fileMode>
+        </fileSet>
+
+
+        <!--
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>conf/</include>
+            </includes>
+        </fileSet>-->
+
+        <!--   <fileSet>
+               <directory>src/main/resources</directory>
+               <includes>
+                   <include>*.properties</include>
+               </includes>
+               <outputDirectory>config</outputDirectory>
+               <fileMode>644</fileMode>
+           </fileSet>-->
+<!--
+        <fileSet>
+            <directory>${project.build.directory}/lib</directory>
+            <outputDirectory>./lib</outputDirectory>
+        </fileSet>-->
+
+       <!-- <fileSet>
+            <directory>${project.build.directory}/</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>./lib</outputDirectory>
+        </fileSet>-->
+
+        <!-- bin/*.sh -->
+
+
+    </fileSets>
+</assembly>

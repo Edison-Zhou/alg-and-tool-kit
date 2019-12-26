@@ -1,0 +1,6 @@
+pathType: hdfs
+dr:
+ dateFormat: "yyyyMMdd"
+ numberDays: -3
+hdfsPath: "/data_warehouse/ods_view.db/db_snapshot_medusa_sailfish_sport_match/key_day=#{date}/key_hour=00"
+sql: "select id from tmp"

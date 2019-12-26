@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://bigdata-cmpt-128-25:3306/hive?createDatabaseIfNotExsit=true;characterEncoding=UTF-8</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>
+        <value>hive</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>
+        <value>hive@whaley</value>
+    </property>
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>/user/hive/warehouse</value>
+    </property>
+
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://bigdata-cmpt-128-1:9083,thrift://bigdata-cmpt-128-13:9083,thrift://bigdata-cmpt-128-25:9083</value>
+        <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.
+        </description>
+    </property>
+
+   <!-- 开启自定义函数 不全default 库 -->
+    <property>
+        <name>hive.function.default.function.enabled</name>
+        <value>true</value>
+    </property>
+
+</configuration>
+
